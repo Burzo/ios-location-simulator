@@ -7,8 +7,8 @@ services:
     volumes:
       # Mount current directory for development (optional)
       - .:/app
-      # Mount usbmux socket for iOS device communication
-      - /var/run/usbmuxd:/var/run/usbmuxd
+      # Mount usbmux socket for iOS device communication (macOS path)
+      - /private/var/run/usbmuxd:/var/run/usbmuxd
     privileged: true
     environment:
       - FLASK_ENV=development
