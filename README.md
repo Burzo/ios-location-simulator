@@ -67,3 +67,22 @@ A web application that uses pymobiledevice3 to simulate GPS locations on iOS dev
 - `POST /api/disconnect` - Disconnect and cleanup
 
 Built on [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for iOS device communication.
+
+## Troubleshooting
+
+### Device Not Found
+
+- Ensure device is connected via USB and unlocked
+- Make sure you've trusted the computer on your iOS device
+- Try running `docker compose restart` after connecting the device
+
+### Developer Mode Issues
+
+If you encounter issues with Developer Mode:
+
+- **App activation**: The app should automatically turn on Developer Mode during device setup
+- **First-time activation issue**: If this is the first time Developer Mode is activated on your device, the toggle may appear off even after the app enables it
+- **Solutions**:
+  - Try connecting to the device twice in the app
+  - Or manually enable it: Go to **Settings → Privacy & Security → Developer Mode** and make sure it's toggled on
+- **Verification**: Always check that Developer Mode shows as "On" in Settings before attempting device connection
