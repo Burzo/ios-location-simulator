@@ -25,8 +25,8 @@ A web application that uses pymobiledevice3 to simulate GPS locations on iOS dev
 2. **Run the application**
 
    ```bash
-   git clone <repository-url>
-   cd ios-location-tester
+   git clone https://github.com/Burzo/ios-location-simulator
+   cd ios-location-simulator
    docker compose up -d
    ```
 
