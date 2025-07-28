@@ -1,0 +1,594 @@
+<script>
+  // iPhone model mapping
+  const iPhoneModels = {
+    "iPhone12,1": {
+      name: "iPhone 11",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-11_Colors_091019.jpg.large.jpg",
+    },
+    "iPhone12,3": {
+      name: "iPhone 11 Pro",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-11-Pro_Colors_091019.jpg.large.jpg",
+    },
+    "iPhone12,5": {
+      name: "iPhone 11 Pro Max",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-11-Pro_Colors_091019.jpg.large.jpg",
+    },
+    "iPhone12,8": {
+      name: "iPhone SE (2nd gen)",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-SE_Colors_041520.jpg.large.jpg",
+    },
+    "iPhone13,1": {
+      name: "iPhone 12 mini",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-12-mini_Colors_10132020.jpg.large.jpg",
+    },
+    "iPhone13,2": {
+      name: "iPhone 12",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-12_Colors_10132020.jpg.large.jpg",
+    },
+    "iPhone13,3": {
+      name: "iPhone 12 Pro",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-12-Pro_Colors_10132020.jpg.large.jpg",
+    },
+    "iPhone13,4": {
+      name: "iPhone 12 Pro Max",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-12-Pro_Colors_10132020.jpg.large.jpg",
+    },
+    "iPhone14,2": {
+      name: "iPhone 13 mini",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-13-mini_Colors_09142021.jpg.large.jpg",
+    },
+    "iPhone14,3": {
+      name: "iPhone 13",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-13_Colors_09142021.jpg.large.jpg",
+    },
+    "iPhone14,4": {
+      name: "iPhone 13 Pro",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-13-Pro_Colors_09142021.jpg.large.jpg",
+    },
+    "iPhone14,5": {
+      name: "iPhone 13 Pro Max",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-13-Pro_Colors_09142021.jpg.large.jpg",
+    },
+    "iPhone14,6": {
+      name: "iPhone SE (3rd gen)",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-SE_Colors_03082022.jpg.large.jpg",
+    },
+    "iPhone15,2": {
+      name: "iPhone 14",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14_Colors_09072022.jpg.large.jpg",
+    },
+    "iPhone15,3": {
+      name: "iPhone 14 Plus",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14_Colors_09072022.jpg.large.jpg",
+    },
+    "iPhone15,4": {
+      name: "iPhone 14 Pro",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14-Pro_Colors_09072022.jpg.large.jpg",
+    },
+    "iPhone15,5": {
+      name: "iPhone 14 Pro Max",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14-Pro_Colors_09072022.jpg.large.jpg",
+    },
+    "iPhone16,1": {
+      name: "iPhone 15",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-15_Colors_09122023.jpg.large.jpg",
+    },
+    "iPhone16,2": {
+      name: "iPhone 15 Plus",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-15_Colors_09122023.jpg.large.jpg",
+    },
+    "iPhone16,3": {
+      name: "iPhone 15 Pro",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-15-Pro_Colors_09122023.jpg.large.jpg",
+    },
+    "iPhone16,4": {
+      name: "iPhone 15 Pro Max",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-15-Pro_Colors_09122023.jpg.large.jpg",
+    },
+    "iPhone17,1": {
+      name: "iPhone 16",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-16_Colors_09092024.jpg.large.jpg",
+    },
+    "iPhone17,2": {
+      name: "iPhone 16 Plus",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-16_Colors_09092024.jpg.large.jpg",
+    },
+    "iPhone17,3": {
+      name: "iPhone 16 Pro",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-16-Pro_Colors_09092024.jpg.large.jpg",
+    },
+    "iPhone17,4": {
+      name: "iPhone 16 Pro Max",
+      image:
+        "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-16-Pro_Colors_09092024.jpg.large.jpg",
+    },
+  };
+
+  // Loading state management
+  function setButtonLoading(button, loading = true) {
+    if (loading) {
+      button.disabled = true;
+      button.classList.add("loading");
+      const originalText = button.innerHTML;
+      button.dataset.originalText = originalText;
+      button.innerHTML = `<div class="loading-spinner"></div><span class="btn-text">${originalText}</span>`;
+    } else {
+      button.disabled = false;
+      button.classList.remove("loading");
+      if (button.dataset.originalText) {
+        button.innerHTML = button.dataset.originalText;
+        delete button.dataset.originalText;
+      }
+    }
+  }
+
+  function setAllButtonsLoading(loading = true) {
+    const buttons = document.querySelectorAll(".btn");
+    buttons.forEach((button) => {
+      if (loading) {
+        button.disabled = true;
+      } else {
+        button.disabled = false;
+      }
+    });
+  }
+
+  function setDeviceCardLoading(deviceCard, loading = true) {
+    if (loading) {
+      deviceCard.classList.add("connecting");
+      const spinner = document.createElement("div");
+      spinner.className = "loading-spinner";
+      deviceCard.appendChild(spinner);
+    } else {
+      deviceCard.classList.remove("connecting");
+      const spinner = deviceCard.querySelector(".loading-spinner");
+      if (spinner) {
+        spinner.remove();
+      }
+    }
+  }
+
+  function showStatus(message, type = "info") {
+    const statusEl = document.getElementById("status");
+
+    // Add animation classes
+    statusEl.classList.remove("status-hidden");
+    statusEl.classList.add("status-visible");
+
+    statusEl.innerHTML = `<p>${message}</p>`;
+    statusEl.className = `status-box status-visible ${type}`;
+  }
+
+  function showDeviceStatus(message, type = "info") {
+    const statusEl = document.getElementById("device-status");
+
+    // Add animation classes
+    statusEl.classList.remove("status-hidden");
+    statusEl.classList.add("status-visible");
+
+    statusEl.innerHTML = `<p>${message}</p>`;
+    statusEl.className = `status-box status-visible ${type}`;
+  }
+
+  function getDeviceModel(productType) {
+    return iPhoneModels[productType] || { name: "iPhone", image: null };
+  }
+
+  function createDeviceCard(device) {
+    const model = getDeviceModel(device.ProductType);
+    const isUSB = device.ConnectionType === "USB";
+
+    return `
+            <div class="device-card" data-device-id="${
+              device.Identifier
+            }" onclick="connectToDevice(event, '${device.Identifier}')">
+                <div class="connection-badge ${isUSB ? "usb" : "network"}">${
+      device.ConnectionType
+    }</div>
+                <div class="device-card-header">
+                    <div class="device-image">
+                        ${
+                          model.image
+                            ? `<img src="${model.image}" alt="${model.name}" onerror="this.style.display='none'">`
+                            : ""
+                        }
+                    </div>
+                    <div class="device-info">
+                        <div class="device-name">${device.DeviceName}</div>
+                        <div class="device-model">${model.name}</div>
+                    </div>
+                </div>
+                <div class="device-details">
+                    <div class="device-detail">
+                        <div class="device-detail-label">iOS Version</div>
+                        <div class="device-detail-value">${
+                          device.ProductVersion
+                        }</div>
+                    </div>
+                    <div class="device-detail">
+                        <div class="device-detail-label">Build</div>
+                        <div class="device-detail-value">${
+                          device.BuildVersion
+                        }</div>
+                    </div>
+                </div>
+            </div>
+        `;
+  }
+
+  async function refreshDevices(event) {
+    const button = event.target;
+    setButtonLoading(button, true);
+    showDeviceStatus("Scanning for devices...", "info");
+
+    // Hide device list with animation
+    hideDeviceGridWithAnimation("device-list");
+    const deviceList = document.getElementById("device-list");
+    deviceList.innerHTML = "";
+
+    try {
+      const response = await fetch("/api/devices");
+      const result = await response.json();
+
+      if (result.success) {
+        try {
+          const devices = JSON.parse(result.output);
+          if (devices && devices.length > 0) {
+            // Hide status when devices are found - the cards speak for themselves
+            hideStatusWithAnimation("device-status");
+
+            // Create device cards and show with animation
+            deviceList.innerHTML = devices
+              .map((device) => createDeviceCard(device))
+              .join("");
+            showDeviceGridWithAnimation("device-list");
+          } else {
+            showDeviceStatus(
+              "No iOS devices found. Ensure:<br>• <strong>USB:</strong> Device paired and unlocked<br>• <strong>Network:</strong> Device first paired via USB, unlocked, and on same WiFi",
+              "error"
+            );
+          }
+        } catch (parseError) {
+          // Fallback to counting by text parsing
+          const deviceCount = (result.output.match(/Identifier/g) || []).length;
+          if (deviceCount > 0) {
+            // Hide status when devices are found and show raw output for debugging
+            hideStatusWithAnimation("device-status");
+
+            // Show raw output in a temporary debug area (this shouldn't normally happen)
+            console.log("Device parsing failed, raw output:", result.output);
+          } else {
+            showDeviceStatus(
+              "No iOS devices found. Ensure:<br>• <strong>USB:</strong> Device paired and unlocked<br>• <strong>Network:</strong> Device first paired via USB, unlocked, and on same WiFi",
+              "error"
+            );
+          }
+        }
+      } else {
+        showDeviceStatus(`Device scan failed: ${result.error}`, "error");
+        hideDeviceGridWithAnimation("device-list");
+      }
+    } catch (error) {
+      showDeviceStatus(`Connection error: ${error.message}`, "error");
+      hideDeviceGridWithAnimation("device-list");
+    } finally {
+      setButtonLoading(button, false);
+    }
+  }
+
+  async function connectToDevice(event, deviceId) {
+    event.stopPropagation();
+    const deviceCard = event.currentTarget;
+
+    setDeviceCardLoading(deviceCard, true);
+    showStatus("Setting up device for location simulation...", "info");
+
+    try {
+      const response = await fetch("/api/connect", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          deviceId: deviceId,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showStatus(`✓ ${result.message}`, "success");
+
+        // Get device information from the clicked card
+        const deviceName = deviceCard.querySelector(".device-name").textContent;
+        const deviceModel =
+          deviceCard.querySelector(".device-model").textContent;
+        const deviceImage = deviceCard.querySelector(".device-image img");
+        const iosVersion = deviceCard.querySelector(
+          ".device-details .device-detail:first-child .device-detail-value"
+        ).textContent;
+        const buildVersion = deviceCard.querySelector(
+          ".device-details .device-detail:nth-child(2) .device-detail-value"
+        ).textContent;
+        const connectionType =
+          deviceCard.querySelector(".connection-badge").textContent;
+
+        // Populate connected device display
+        document.getElementById("connected-device-name").textContent =
+          deviceName;
+        document.getElementById("connected-device-model").textContent =
+          deviceModel;
+        document.getElementById("connected-ios-version").textContent =
+          iosVersion;
+        document.getElementById("connected-build-version").textContent =
+          buildVersion;
+        document.getElementById("connected-connection-type").textContent =
+          connectionType;
+        document.getElementById("connected-device-id").textContent = deviceId;
+
+        // Set device image if available
+        const connectedDeviceImg = document.getElementById(
+          "connected-device-img"
+        );
+        if (deviceImage && deviceImage.src) {
+          connectedDeviceImg.src = deviceImage.src;
+          connectedDeviceImg.alt = deviceModel;
+          connectedDeviceImg.style.display = "block";
+        } else {
+          connectedDeviceImg.style.display = "none";
+        }
+
+        // Hide scanning controls and device list
+        hideControlsWithAnimation("device-scan-controls");
+        hideDeviceGridWithAnimation("device-list");
+        hideStatusWithAnimation("device-status");
+
+        // Show connected device display
+        showConnectedDeviceWithAnimation("connected-device");
+
+        // Hide the "Connect your iOS device..." text
+        document.getElementById("device-setup-description").style.display =
+          "none";
+
+        // Show the location simulation card with animation
+        showCardWithAnimation("location-simulation-card");
+      } else {
+        showStatus(`Setup failed: ${result.message}`, "error");
+      }
+    } catch (error) {
+      showStatus(`Setup error: ${error.message}`, "error");
+    } finally {
+      setDeviceCardLoading(deviceCard, false);
+    }
+  }
+
+  async function setLocation(event) {
+    const button = event.target;
+    const lat = document.getElementById("latitude").value;
+    const lng = document.getElementById("longitude").value;
+
+    if (!lat || !lng) {
+      showStatus(
+        "Please enter both latitude and longitude coordinates",
+        "error"
+      );
+      return;
+    }
+
+    setButtonLoading(button, true);
+    setAllButtonsLoading(true);
+    showStatus(`Setting location to ${lat}, ${lng}...`, "info");
+
+    try {
+      const response = await fetch("/api/location/set", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          latitude: lat,
+          longitude: lng,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showStatus(`✓ ${result.message}`, "success");
+      } else {
+        showStatus(`Location setting failed: ${result.message}`, "error");
+      }
+    } catch (error) {
+      showStatus(`Request error: ${error.message}`, "error");
+    } finally {
+      setButtonLoading(button, false);
+      setAllButtonsLoading(false);
+    }
+  }
+
+  async function setQuickLocation(event, lat, lng) {
+    const button = event.target;
+
+    setButtonLoading(button, true);
+    setAllButtonsLoading(true);
+    showStatus(`Setting location to ${lat}, ${lng}...`, "info");
+
+    try {
+      const response = await fetch("/api/location/set", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          latitude: lat,
+          longitude: lng,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showStatus(`✓ ${result.message}`, "success");
+      } else {
+        showStatus(`Location setting failed: ${result.message}`, "error");
+      }
+    } catch (error) {
+      showStatus(`Request error: ${error.message}`, "error");
+    } finally {
+      setButtonLoading(button, false);
+      setAllButtonsLoading(false);
+    }
+  }
+
+  async function disconnectDevice(event) {
+    const button = event.target;
+    setButtonLoading(button, true);
+    showStatus("Disconnecting device...", "info");
+
+    try {
+      const response = await fetch("/api/disconnect", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showStatus(`✓ ${result.message}`, "success");
+
+        // Hide connected device display
+        hideConnectedDeviceWithAnimation("connected-device");
+
+        // Show scanning controls again
+        showControlsWithAnimation("device-scan-controls");
+        showStatusWithAnimation("device-status");
+
+        // Show the "Connect your iOS device..." text again
+        document.getElementById("device-setup-description").style.display =
+          "block";
+
+        // Hide the location simulation card with animation
+        hideCardWithAnimation("location-simulation-card");
+
+        // Automatically scan for devices after disconnect
+        const refreshBtn = document.querySelector(".btn-secondary");
+        refreshDevices({ target: refreshBtn });
+      } else {
+        showStatus(`Disconnect failed: ${result.message}`, "error");
+      }
+    } catch (error) {
+      showStatus(`Request error: ${error.message}`, "error");
+    } finally {
+      setButtonLoading(button, false);
+    }
+  }
+
+  // Auto-scan devices on page load
+  window.addEventListener("load", function () {
+    // Create a synthetic event for the auto-refresh
+    const refreshBtn = document.querySelector(".btn-secondary");
+    refreshDevices({ target: refreshBtn });
+  });
+
+  // Add keyboard shortcuts
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey) {
+      switch (e.key) {
+        case "Enter":
+          e.preventDefault();
+          const setBtn = document.querySelector(".btn-success");
+          if (!setBtn.disabled) {
+            setLocation({ target: setBtn });
+          }
+          break;
+      }
+    }
+  });
+
+  // Animation helper functions
+  function showCardWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("card-hidden");
+    element.classList.add("card-visible");
+  }
+
+  function hideCardWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("card-visible");
+    element.classList.add("card-hidden");
+  }
+
+  function showStatusWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("status-hidden");
+    element.classList.add("status-visible");
+  }
+
+  function hideStatusWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("status-visible");
+    element.classList.add("status-hidden");
+  }
+
+  function showDeviceGridWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("grid-hidden");
+    element.classList.add("grid-visible");
+  }
+
+  function hideDeviceGridWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("grid-visible");
+    element.classList.add("grid-hidden");
+  }
+
+  function showConnectedDeviceWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("display-hidden");
+    element.classList.add("display-visible");
+  }
+
+  function hideConnectedDeviceWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("display-visible");
+    element.classList.add("display-hidden");
+  }
+
+  function showControlsWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("controls-hidden");
+    element.classList.add("controls-visible");
+  }
+
+  function hideControlsWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("controls-visible");
+    element.classList.add("controls-hidden");
+  }
+</script>

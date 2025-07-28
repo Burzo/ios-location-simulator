@@ -1,0 +1,76 @@
+<div class="card">
+  <h2>Device Setup</h2>
+  <p
+    id="device-setup-description"
+    style="color: var(--apple-text-secondary); margin-bottom: 24px"
+  >
+    Connect your iOS device to get started
+  </p>
+
+  <div class="button-group controls-visible" id="device-scan-controls">
+    <button onclick="refreshDevices(event)" class="btn btn-secondary">
+      Check Devices
+    </button>
+  </div>
+
+  <div id="device-status" class="status-box status-visible info">
+    <p>Click "Check Devices" to scan for connected iOS devices</p>
+  </div>
+
+  <div id="device-list" class="device-grid grid-hidden"></div>
+
+  <div id="connected-device" class="connected-device-display display-hidden">
+    <div class="connected-device-card">
+      <div class="connected-device-header">
+        <div class="connected-device-image">
+          <img
+            id="connected-device-img"
+            src=""
+            alt=""
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="connected-device-info">
+          <div class="connected-device-name" id="connected-device-name"></div>
+          <div class="connected-device-model" id="connected-device-model"></div>
+          <div class="connected-status">✓ Connected</div>
+        </div>
+      </div>
+      <div class="connected-device-details">
+        <div class="connected-device-detail">
+          <div class="connected-device-detail-label">iOS Version</div>
+          <div
+            class="connected-device-detail-value"
+            id="connected-ios-version"
+          ></div>
+        </div>
+        <div class="connected-device-detail">
+          <div class="connected-device-detail-label">Build</div>
+          <div
+            class="connected-device-detail-value"
+            id="connected-build-version"
+          ></div>
+        </div>
+        <div class="connected-device-detail">
+          <div class="connected-device-detail-label">Connection</div>
+          <div
+            class="connected-device-detail-value"
+            id="connected-connection-type"
+          ></div>
+        </div>
+        <div class="connected-device-detail">
+          <div class="connected-device-detail-label">Device ID</div>
+          <div
+            class="connected-device-detail-value"
+            id="connected-device-id"
+          ></div>
+        </div>
+      </div>
+      <div class="connected-device-actions">
+        <button onclick="disconnectDevice(event)" class="btn btn-warning">
+          Disconnect Device
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

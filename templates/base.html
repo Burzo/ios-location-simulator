@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}iOS Location Simulator{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <meta
+      name="description"
+      content="Simulate GPS locations on iOS devices for testing location-based features"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>iOS Location Simulator</h1>
+        <p>Test location-based features with precision and ease</p>
+      </header>
+
+      {% block content %}{% endblock %} {% include
+      'components/status_display.html' %}
+    </div>
+
+    {% include 'components/scripts.html' %}
+  </body>
+</html>

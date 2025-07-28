@@ -1,0 +1,79 @@
+<div class="card card-hidden" id="location-simulation-card">
+  <h2>Location Simulation</h2>
+  <p style="color: var(--apple-text-secondary); margin-bottom: 24px">
+    Set custom coordinates or choose from popular locations
+  </p>
+
+  <div class="input-group">
+    <div class="input-field">
+      <label for="latitude">Latitude</label>
+      <input
+        type="number"
+        id="latitude"
+        placeholder="37.7749"
+        step="any"
+        min="-90"
+        max="90"
+      />
+      <small>Valid range: -90 to 90</small>
+    </div>
+    <div class="input-field">
+      <label for="longitude">Longitude</label>
+      <input
+        type="number"
+        id="longitude"
+        placeholder="-122.4194"
+        step="any"
+        min="-180"
+        max="180"
+      />
+      <small>Valid range: -180 to 180</small>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button onclick="setLocation(event)" class="btn btn-success">
+      Set Location
+    </button>
+  </div>
+
+  <h3>Quick Locations</h3>
+  <div class="location-buttons">
+    <button
+      onclick="setQuickLocation(event, 37.7749, -122.4194)"
+      class="btn btn-small"
+    >
+      San Francisco
+    </button>
+    <button
+      onclick="setQuickLocation(event, 40.7128, -74.0060)"
+      class="btn btn-small"
+    >
+      New York
+    </button>
+    <button
+      onclick="setQuickLocation(event, 51.5074, -0.1278)"
+      class="btn btn-small"
+    >
+      London
+    </button>
+    <button
+      onclick="setQuickLocation(event, 35.6762, 139.6503)"
+      class="btn btn-small"
+    >
+      Tokyo
+    </button>
+    <button
+      onclick="setQuickLocation(event, -33.8688, 151.2093)"
+      class="btn btn-small"
+    >
+      Sydney
+    </button>
+    <button
+      onclick="setQuickLocation(event, 48.8566, 2.3522)"
+      class="btn btn-small"
+    >
+      Paris
+    </button>
+  </div>
+</div>
