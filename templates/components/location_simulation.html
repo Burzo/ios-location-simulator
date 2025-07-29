@@ -1,4 +1,4 @@
-<div class="card card-hidden" id="location-simulation-card">
+<div class="card" id="location-simulation">
   <h2>Location Simulation</h2>
   <p style="color: var(--apple-text-secondary); margin-bottom: 24px">
     Set custom coordinates or choose from popular locations
@@ -32,48 +32,63 @@
   </div>
 
   <div class="button-group">
-    <button onclick="setLocation(event)" class="btn btn-success">
+    <button onclick="setCustomLocation()" class="btn btn-success">
       Set Location
+    </button>
+    <button onclick="clearLocation()" class="btn btn-warning">
+      Clear Location
     </button>
   </div>
 
   <h3>Quick Locations</h3>
   <div class="location-buttons">
     <button
-      onclick="setQuickLocation(event, 37.7749, -122.4194)"
+      onclick="setQuickLocation('San Francisco', 37.7749, -122.4194, event)"
       class="btn btn-small"
     >
-      San Francisco
+      🌉 San Francisco
     </button>
     <button
-      onclick="setQuickLocation(event, 40.7128, -74.0060)"
+      onclick="setQuickLocation('New York', 40.7128, -74.0060, event)"
       class="btn btn-small"
     >
-      New York
+      🗽 New York
     </button>
     <button
-      onclick="setQuickLocation(event, 51.5074, -0.1278)"
+      onclick="setQuickLocation('London', 51.5074, -0.1278, event)"
       class="btn btn-small"
     >
-      London
+      🏰 London
     </button>
     <button
-      onclick="setQuickLocation(event, 35.6762, 139.6503)"
+      onclick="setQuickLocation('Tokyo', 35.6762, 139.6503, event)"
       class="btn btn-small"
     >
-      Tokyo
+      🗼 Tokyo
     </button>
     <button
-      onclick="setQuickLocation(event, -33.8688, 151.2093)"
+      onclick="setQuickLocation('Sydney', -33.8688, 151.2093, event)"
       class="btn btn-small"
     >
-      Sydney
+      🏙️ Sydney
     </button>
     <button
-      onclick="setQuickLocation(event, 48.8566, 2.3522)"
+      onclick="setQuickLocation('Paris', 48.8566, 2.3522, event)"
       class="btn btn-small"
     >
-      Paris
+      🗼 Paris
+    </button>
+    <button
+      onclick="setQuickLocation('Berlin', 52.5200, 13.4050, event)"
+      class="btn btn-small"
+    >
+      🏛️ Berlin
+    </button>
+    <button
+      onclick="setQuickLocation('Dubai', 25.2048, 55.2708, event)"
+      class="btn btn-small"
+    >
+      🏙️ Dubai
     </button>
   </div>
 </div>

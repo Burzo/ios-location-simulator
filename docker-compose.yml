@@ -1,7 +1,7 @@
 services:
-  ios-location-tester:
+  location-simulator:
     build: .
-    container_name: ios-location-tester
+    container_name: multi-platform-location-simulator
     ports:
       - "8080:5000"
     volumes:
@@ -13,6 +13,8 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
+      # Connect to host ADB server for Android devices (Docker on macOS compatibility)
+      - ADB_SERVER_SOCKET=tcp:host.docker.internal:5037
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/"]

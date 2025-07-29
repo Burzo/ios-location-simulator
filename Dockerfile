@@ -7,8 +7,9 @@ ENV PYTHONUNBUFFERED=1
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=development
 
-# Install system dependencies required for pymobiledevice3
+# Install system dependencies for both iOS and Android support
 RUN apt-get update && apt-get install -y \
+    # iOS support (pymobiledevice3)
     libusb-1.0-0-dev \
     usbmuxd \
     openssl \
@@ -16,6 +17,12 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     gcc \
     curl \
+    # Android support (ADB)
+    android-tools-adb \
+    android-tools-fastboot \
+    # Additional utilities
+    wget \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Create app directory
@@ -37,5 +44,8 @@ EXPOSE 5000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:5000/ || exit 1
 
-# Run the Flask application as root (required for iOS device access)
+# Create directory for device state files
+RUN mkdir -p /tmp && chmod 777 /tmp
+
+# Run the Flask application as root (required for device access)
 CMD ["python", "app.py"] 
