@@ -56,7 +56,7 @@ A web application that uses pymobiledevice3 to simulate GPS locations on iOS dev
 ## Technical Details
 
 - Supports iOS 17+ with RSD tunnel connections
-- Fallback support for older iOS versions
+- Fallback support for older iOS versions (not tested)
 - Device-specific UDID targeting
 
 ## API
@@ -74,7 +74,6 @@ Built on [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for iOS 
 
 - Ensure device is connected via USB and unlocked
 - Make sure you've trusted the computer on your iOS device
-- Try running `docker compose restart` after connecting the device
 
 ### Developer Mode Issues
 
